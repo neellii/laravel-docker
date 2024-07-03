@@ -10,7 +10,13 @@
 <body>
 <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{{ route('home') }}">Logo</a>
+    <a class="navbar-brand" href="{{ route('dashboard') }}">
+      @if(auth()->user()->role_id == 1)
+        Admin Dashboard
+      @else
+        User Dashboard
+      @endif
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -19,7 +25,7 @@
         @if(Route::has('login'))
           @auth
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
+              <a class="nav-link" href="{{ route('home') }}">Main</a>
             </li>
 
             <li class="nav-item dropdown">

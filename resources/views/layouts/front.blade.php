@@ -49,16 +49,22 @@
 					</div>
 					<div class="col-md-6">
 						<div class="right-element">
-							<a href="#" class="user-account for-buy"><i
-									class="icon icon-user me-2"></i><span>
+										<i class="icon icon-user me-2"></i>
 										@auth
-											{{ auth()->user()->name }}
-											<a href="{{ route('logout') }}">Logout</a>
+											<div class="dropdown" style="display: inline-block;">
+												<a class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+													{{ auth()->user()->name }}
+												</a>
+												<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+													<li><a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a></li>
+													<li><a class="dropdown-item" href="{{ route('orders.list') }}">My orders</a></li>
+													<li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
+												</ul>
+											</div>
 										@else
 											<a href="{{ route('login') }}">Login</a> |
 											<a href="{{ route('register') }}">Sign In</a>
 										@endauth
-									</span></a>
 							<a href="{{ route('shopcart.index') }}" class="cart for-buy"><i class="icon icon-clipboard me-2"></i>
 							<span>Cart</span>
 							</a>

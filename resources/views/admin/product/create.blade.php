@@ -19,6 +19,28 @@
             <div class="invalid-feedback">{{ $message }}</div>
           @enderror
         </div>
+
+        <div class="mb-3">
+          <label for="author" class="form-label">Author</label>
+
+          <input name="author" type="text" class="form-control @error('author')
+            is-invalid
+          @enderror" id="author" placeholder="Author" value="{{ old('author') }}"></input>
+          @error('author')
+            <div class="invalid-feedback">{{ $message }}</div>
+          @enderror
+        </div>
+
+        <div class="mb-3">
+          <label for="Published year" class="form-label">Published year</label>
+
+          <input name="published_year" type="text" class="form-control @error('published_year')
+            is-invalid
+          @enderror" id="published_year" placeholder="Published Year" value="{{ old('published_year') }}"></input>
+          @error('published_year')
+            <div class="invalid-feedback">{{ $message }}</div>
+          @enderror
+        </div>
         
         <div class="mb-3">
           <label for="description" class="form-label">Description</label>

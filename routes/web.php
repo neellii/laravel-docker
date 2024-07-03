@@ -17,9 +17,16 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 // ============== Home Page ============
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// ============== User Dashboard ==============
+// ============== User Dashboard X Checkout==============
 Route::middleware(['auth','verified'])->group(function () {
     Route::get('dashboard', [UserController::class,'dashboard'])->name('dashboard');
+
+    Route::post('checkout', [StripeController::class, 'checkout'])->name('checkout');
+    Route::get('checkout-success', [StripeController::class, 'success'])->name('checkout.success');
+    Route::get('checkout-cancel', [StripeController::class, 'cancel'])->name('checkout.cancel');
+    Route::post('/webhook', [StripeController::class, 'webhook'])->name('checkout.webhook');
+
+    Route::get('orders-list', [OrderProductController::class, 'index'])->name('orders.list');
 });
 
 // ============== Guest Routes ================
@@ -53,13 +60,6 @@ Route::middleware('auth')->group(function() {
     Route::post('/storecomment', [HomeController::class, 'storeComment'])->name('home.store.comment');
 
     Route::resource('shopcart', ShopCartController::class)->except(['create', 'edit', 'show']);
-
-    Route::post('checkout', [StripeController::class, 'checkout'])->name('checkout');
-    Route::get('checkout-success', [StripeController::class, 'success'])->name('checkout.success');
-    Route::get('checkout-cancel', [StripeController::class, 'cancel'])->name('checkout.cancel');
-    Route::post('/webhook', [StripeController::class, 'webhook'])->name('checkout.webhook');
-
-    Route::get('orders-list', [OrderProductController::class, 'index'])->name('orders.list');
 });
 
 // ============== Admin Routes ============

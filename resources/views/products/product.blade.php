@@ -14,15 +14,19 @@
                     <span>${{ $product->price }}</span>
                 </div>
 
+                <div class="fs-8 mb-1">
+                    <span>Rating: {{ sprintf("%.2f", $comments->pluck('rate')->avg()) }}/5</span>
+                </div>
+
                 <div class="fs-8 mb-2">
                     <span>Category: {{ $product->category->title }}</span>
                 </div>
 
                 <div class="d-flex">
-                    <form action="{{ route('shopcart.store') }}" method="post">
+                    <form class="add-form" action="{{ route('shopcart.store') }}" method="post">
                         @csrf
-                       <input name="quantity" class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                       <input name="product_id" hidden value="{{ $product->id }}" />
+                        <input name="quantity" class="form-control text-center me-3" id="inputQuantity" min="1" type="num" value="1" style="max-width: 3rem" />
+                        <input name="product_id" hidden value="{{ $product->id }}" />
                         <button style="margin-top: 0;" class="btn btn-outline-dark flex-shrink-0" type="submit">
                             <i class="bi-cart-fill me-1"></i>
                             Add to cart
@@ -135,4 +139,41 @@
         </form>
     </div>
 </section>
+@endsection
+
+
+@section('scripts')
+<script>
+    $('.add-form').each(function() {
+  $(this).submit(function(e) {
+    e.preventDefault();
+    let formData = new FormData(e.target)
+
+    $.ajax({
+    url: "{{ route('shopcart.store') }}",
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    },
+    method: "POST",   
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function(data) {
+        $('div.alert-fixed').html(data);
+        setTimeout(function() {
+            $('div.alert-fixed').find('.alert').fadeOut('0.5', function() {
+              $(this).remove()
+            });
+    }, 1000);
+    },
+    error: function(error) {
+        $('div.alert-fixed').html('');
+        $.each(error.responseJSON.errors, function(key,value) {
+            $('div.alert-fixed').append('<div class="alert alert-danger">'+value+'</div');
+        }); 
+    }
+    }); 
+  })
+})
+</script>
 @endsection

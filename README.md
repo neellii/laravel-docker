@@ -1,29 +1,17 @@
 # Laravel Docker E-commerce
 
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
-# Laravel Docker Starter Kit
-
--   Laravel v11.x
--   PHP v8.3.x
--   MySQL v8.1.x (default)
--   phpMyAdmin v5.x
--   Mailpit v1.x
--   Node.js v18.x
--   NPM v10.x
--   Yarn v1.x
--   Vite v5.x
--   Rector v1.x
--   Redis v7.2.x
-
-# Requirements
-
--   Stable version of [Docker](https://docs.docker.com/engine/install/)
--   Compatible version of [Docker Compose](https://docs.docker.com/compose/install/#install-compose)
+-   AJAX Cart Functionality
+-   AJAX Product mixed filtration (price, year, title, category) feature
+-   Full checkout process with Stripe API
+-   Eloquent model relationships
+-   User admin/user roles
+-   CRUD for admin user (categories, products, comments/reviews)
+-   SMTP Email verification with mailpit
+-   Product's review feature
 
 # Setup
 
-### For first time only !
+### For first time only
 
 -   `git clone https://github.com/refactorian/laravel-docker.git`
 -   `cd laravel-docker`
@@ -34,6 +22,7 @@
 -   `chown -R www-data:www-data /var/www /var/www/bootstrap/cache`
 -   `chmod -R 775 /var/www/storage /var/www/bootstrap/cache`
 -   `add in app/Providers/AppServiceProvider boot method this line: view()->share('categoriesTree', Category::where('parent_id', null)->with('children')->get());`
+-   `php artisan migrate --seed`
 -   `composer setup`
 
 ### From the second time onwards
@@ -58,4 +47,8 @@
 -   Password: `neelli`
 -   Database: `booksStore`
 
----
+### users profile
+
+-   Email: any email in db users table
+-   Password: password
+-   ***

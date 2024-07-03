@@ -16,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::paginate(15);
+        $categories = Category::with('parent')->paginate(15);
         // dump($categoriesWithChildren);
         // dd($categories);
         return view("admin.category.index", compact(['categories']));
@@ -110,6 +110,7 @@ class CategoryController extends Controller
 
         $parent = Category::find($category->parent_id);
         $title = $parent->title . ' > ' . $title;
+
         return CategoryController::getParentsTree($parent, $title);
     }
 }

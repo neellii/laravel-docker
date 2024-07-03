@@ -20,15 +20,15 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
         Category::factory(50)->create();
 
-        $categories = Category::skip(10)->limit(40)->get();
+        $categories = Category::offset(10)->limit(40)->get();
         $categories->each(function ($category_update, $key) {
             $category_update->parent_id = fake()->numberBetween(1, 10);
             $category_update->save();
         });
 
-        $categories2 = Category::inRandomOrder()->offset(10)->limit(10)->get();
+        $categories2 = Category::offset(10)->limit(5)->get();
         $categories2->each(function ($category_update, $key) {
-            $category_update->parent_id = fake()->numberBetween(11, 20);
+            $category_update->parent_id = fake()->numberBetween(16, 20);
             $category_update->save();
         });
 
