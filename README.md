@@ -9,6 +9,9 @@
 -   SMTP Email verification with mailpit
 -   Product's review feature
 
+# Preview
+https://github.com/neellii/laravel-docker/assets/142133938/a4be1e8e-ed1c-48f3-b961-ddf8078e66aa
+
 # Setup
 
 ### For first time only
@@ -51,4 +54,3 @@
 
 -   Email: any email in db users table
 -   Password: password
--   ***
