@@ -11,11 +11,17 @@ use Illuminate\Auth\Events\Registered;
 
 class UserController extends Controller
 {
+     /**
+     * Show the form for creating a new resource.
+     */
     public function create() 
     {
         return view("user.create");
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(StoreRequest $request)
     {
         $validated = $request->validated();
@@ -28,11 +34,17 @@ class UserController extends Controller
         return redirect()->route('verification.notice');
     }
 
+    /**
+     * Shoiw Login User form
+     */
     public function login()
     {
         return view("user.login");
     }
 
+    /**
+     * Login User
+     */
     public function loginAuth(UpdateRequest $request)
     {
         $credentials = $request->validated();
@@ -45,10 +57,11 @@ class UserController extends Controller
         return back()->withErrors([
             "email" => "Wrong email or password",
         ]);
-        // dump($request->boolean('remember'));
-        // dd($request->all());
     }
 
+    /**
+     * Logout User
+     */
     public function logout(Request $request) {
         Auth::logout();
 
@@ -59,6 +72,9 @@ class UserController extends Controller
         return redirect()->route("login");
     }
 
+    /**
+     * Show User/Admin Dashboard
+     */
     public function dashboard()
     {
         if(Auth::user()->role_id != 1){ 

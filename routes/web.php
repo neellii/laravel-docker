@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\StripeController;
-use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -11,7 +10,6 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\OrderProductController;
 use App\Http\Controllers\ShopCartController;
-use App\Models\OrderProduct;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 // ============== Home Page ============
@@ -75,5 +73,4 @@ Route::prefix('home')->name('home.')->group(function() {
     Route::get('product/{id}/show', [HomeController::class, 'productShow'])->name('product.show');
     Route::get('product-search', [HomeController::class, 'search'])->name('products.search');
 });
-
 

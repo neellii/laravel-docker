@@ -6,14 +6,16 @@ use App\Http\Filters\ProductFilter;
 use App\Models\Comment;
 use App\Models\Product;
 use App\Models\Category;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Comment\StoreRequest;
 use App\Http\Requests\Product\FilterRequest;
-use App\Models\ShopCart;
 
 class HomeController extends Controller
 {
+
+    /**
+     * Display homepage
+     */
     public function index() 
     {   
         $products = Product::paginate(20);
@@ -21,6 +23,10 @@ class HomeController extends Controller
         return view('welcome', compact('products'));
     }
 
+
+    /**
+     * Products filtering request
+     */
     public function search(FilterRequest $request)
     {
         $data = $request->validated();
@@ -34,6 +40,9 @@ class HomeController extends Controller
         return response()->json(array('success' => true, 'html' => $html));
     }
 
+    /**
+     * Display products from category
+     */
     public function categoryProducts($title, $id)
     {
         $category = Category::find($id);
@@ -41,6 +50,9 @@ class HomeController extends Controller
         return view('home.categoryProducts', compact(['products', 'category']));
     }
 
+    /**
+     * Display single product
+     */
     public function productShow($id)
     {
         $product = Product::find($id);
@@ -48,6 +60,9 @@ class HomeController extends Controller
         return view('products.product', compact(['product', 'comments']));
     }
 
+     /**
+     * Store Product's Comment/Review
+     */
     public function storeComment(StoreRequest $request)
     {
         $data = $request->validated();

@@ -158,7 +158,6 @@ border:none;
       <div class="col-md-12">
         <h3 class="section-title mb-4">Browse Books</h3>
 
-
         <div class="row height d-flex justify-content-center align-items-center">
 
         <div class="col-md-6">

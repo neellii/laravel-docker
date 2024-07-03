@@ -12,6 +12,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class StripeController extends Controller
 {
+     /**
+     *  Checkout request handling
+     */
     public function checkout()
     {
         try {
@@ -66,6 +69,9 @@ class StripeController extends Controller
         }
     }
 
+     /**
+     * After Success checkout handling
+     */
     public function success(Request $request)
     {
         $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET_KEY'));
@@ -128,6 +134,9 @@ class StripeController extends Controller
         }
     }
 
+     /**
+     * Cancelled checkout handling
+     */
     public function cancel() 
     {
         return redirect()->back()->with('error', 'Somethimg went wrong. Try again later');
